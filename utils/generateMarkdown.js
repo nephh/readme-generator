@@ -1,5 +1,3 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
 function renderLicenseBadge(license) {
   let licenseBadge;
 
@@ -26,13 +24,11 @@ function renderLicenseBadge(license) {
       licenseBadge = "https://img.shields.io/badge/License-MPL%202.0-blue.svg";
       break;
     default:
-      licenseBadge = "https://img.shields.io/badge/License-None-red.svg";
+      licenseBadge = "";
   }
   return licenseBadge;
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
 function renderLicenseLink(license) {
   let licenseURL;
 
@@ -61,53 +57,91 @@ function renderLicenseLink(license) {
   return licenseURL;
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {
-  return ``;
+function renderConduct(contribute, email, github) {
+  if (contribute) {
+    return `## Contributing
+
+I welcome and appreciate contributions from the open-source community! Before you get started, please take a moment to review the guidelines and familiarize yourself with the Code of Conduct.
+
+### Code of Conduct
+
+We are committed to providing a welcoming and respectful environment for all contributors. Please read the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) to understand our expectations for behavior and interactions within this project.
+
+### How to Contribute
+
+1. Fork this repository to your GitHub account.
+2. Clone the forked repository to your local machine.
+3. Create a new branch for your contribution: 'git checkout -b feature/your-feature-name'
+4. Make your changes, add your code, and commit your work.
+5. Push your changes to your forked repository on GitHub: 'git push origin feature/your-feature-name'
+6. Open a Pull Request (PR) to the original repository. Please provide a clear and concise description of your changes in the PR.
+7. I will review your PR and may provide feedback or request changes. Once your contribution is approved, it will be merged into the main project.
+
+### Reporting Bugs and Contact Info
+
+Another great way to contribute is to report any bugs you come across. 
+Please contact me at [${email}](${email}), on [Github](${github}), or you can open an issue.
+I try to make changes and fixes as soon as I can.
+
+Thank you for your interest in contributing to the project!
+
+  `;
+  } else {
+    return "";
+  }
 }
 
-// TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title}
+  const { title, license, contribute, intro, install, usage, email, github } =
+    data;
 
-[![License Badge](${renderLicenseBadge(data.license)})](${renderLicenseLink(data.license)})
+  const contributeSection = contribute
+    ? `
+- [Contributing](#contributing)
+  - [Code of Conduct](#code-of-conduct)
+  - [How to Contribute](#how-to-contribute)
+  - [Reporting Bugs and Contact Info](#reporting-bugs-and-contact-info)`
+    : ``;
 
-This repository contains the HTML and CSS code for a password generator that will generate a password for the user.
+  const contributeBadge = contribute
+    ? `[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)`
+    : ``;
+
+  return `# ${title}
+
+[![License Badge](${renderLicenseBadge(license)})](${renderLicenseLink(
+    license
+  )})
+${contributeBadge}
+
+${intro}
 
 ## Table of Contents
 
-- [Introduction](#introduction)
 - [Installation](#installation)
-- [Changes Made](#changes-made)
 - [Usage](#usage)
-- [Credits](#credits)
+- [Credits](#credits) ${contributeSection}
 - [License](#license)
-
-## Introduction
-
-${data.intro}
 
 ## Installation
 
-N/A
+${install}
 
-## Changes Made
-
-The code that was added by myself are the generatePassword function, as well as all the code within the writePassword function
-in order for the application to work. Comments within the file give a more in-depth look at the code written.
 ## Usage
 
-See commented lines in the JavaScript file to see the specific changes. Website is hosted [here.](https://nephh.github.io/basic-password-generator)
-
+${usage}
 
 ## Credits
 
 N/A
 
+${renderConduct(contribute, email, github)}
+
 ## License
 
-This project is licensed under the terms of the [${data.license}](${renderLicenseLink(data.license)}).
+This project is licensed under the terms of the [${license}](${renderLicenseLink(
+    license
+  )}).
 
 You can find the full license text in the [LICENSE](LICENSE) file.
 
