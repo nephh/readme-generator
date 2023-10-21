@@ -57,7 +57,21 @@ function renderLicenseLink(license) {
   return licenseURL;
 }
 
-function renderConduct(contribute, email, github) {
+function renderLicense(license) {
+  if (license === "None") {
+    return "";
+  } else {
+    return `## License
+
+This project is licensed under the terms of the [${license}](${renderLicenseLink(
+      license
+    )}).
+    
+You can find the full license text in the [LICENSE](LICENSE) file.`;
+  }
+}
+
+function renderConduct(contribute) {
   if (contribute) {
     return `## Contributing
 
@@ -77,12 +91,6 @@ We are committed to providing a welcoming and respectful environment for all con
 6. Open a Pull Request (PR) to the original repository. Please provide a clear and concise description of your changes in the PR.
 7. I will review your PR and may provide feedback or request changes. Once your contribution is approved, it will be merged into the main project.
 
-### Reporting Bugs and Contact Info
-
-Another great way to contribute is to report any bugs you come across. 
-Please contact me at [${email}](${email}), on [Github](${github}), or you can open an issue.
-I try to make changes and fixes as soon as I can.
-
 Thank you for your interest in contributing to the project!
 
   `;
@@ -91,37 +99,77 @@ Thank you for your interest in contributing to the project!
   }
 }
 
-function generateMarkdown(data) {
-  const { title, license, contribute, intro, install, usage, email, github } =
-    data;
+function renderTesting(test) {
+  const testContent = test;
+  if (testContent.trim() === "") {
+    return "";
+  } else {
+    return `## Testing
+
+${testContent}`;
+  }
+}
+
+function renderTableOfContents(test, contribute, license) {
+  const testingSection =
+    test.trim() === ""
+      ? ``
+      : `
+- [Testing](#Testing)`;
+
+const licenseSection =
+    license === "None"
+      ? ``
+      : `
+- [License](#license)`;
 
   const contributeSection = contribute
     ? `
 - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
-  - [How to Contribute](#how-to-contribute)
-  - [Reporting Bugs and Contact Info](#reporting-bugs-and-contact-info)`
+  - [How to Contribute](#how-to-contribute)`
     : ``;
+
+  return `## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage) ${testingSection}
+- [Credits](#credits) ${contributeSection} ${licenseSection}
+- [Questions and Contact](#questions-and-contact)`;
+}
+
+function generateMarkdown(data) {
+  const {
+    title,
+    license,
+    contribute,
+    intro,
+    install,
+    usage,
+    email,
+    github,
+    test,
+  } = data;
 
   const contributeBadge = contribute
     ? `[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)`
     : ``;
 
+  const licenseBadge =
+    license != "None"
+      ? `[![License Badge](${renderLicenseBadge(license)})](${renderLicenseLink(
+          license
+        )})`
+      : ``;
+
   return `# ${title}
 
-[![License Badge](${renderLicenseBadge(license)})](${renderLicenseLink(
-    license
-  )})
+${licenseBadge}
 ${contributeBadge}
 
 ${intro}
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits) ${contributeSection}
-- [License](#license)
+${renderTableOfContents(test, contribute)}
 
 ## Installation
 
@@ -131,20 +179,25 @@ ${install}
 
 ${usage}
 
+${renderTesting(test)}
+
 ## Credits
 
 N/A
 
-${renderConduct(contribute, email, github)}
+${renderConduct(contribute)}
 
-## License
+${renderLicense(license)}
 
-This project is licensed under the terms of the [${license}](${renderLicenseLink(
-    license
-  )}).
+## Questions and Contact
 
-You can find the full license text in the [LICENSE](LICENSE) file.
+Thank you for checking out the project!
 
+If you have any questions or need further assistance with this project, feel free to reach out. You can contact me through the following methods:
+    
+- **GitHub Issues**: Please use the Github Issue Tracker for bug reports, feature requests, or general questions related to the project. You can find my Github profile @[${github}](https://github.com/${github})
+    
+- **Email**: You can also email me at [${email}](mailto:${email}) for any private or sensitive inquiries.
 `;
 }
 

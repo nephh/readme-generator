@@ -9,7 +9,7 @@ const licenseChoices = [
   "BSD 3-Clause License",
   "Creative Commons Attribution 4.0 International License",
   "Mozilla Public License 2.0",
-  "None"
+  "None",
 ];
 
 const questions = [
@@ -20,49 +20,56 @@ const questions = [
   },
   {
     type: "input",
-    message: "Enter the title of your project: ",
+    message: "Enter the title of your project:",
     name: "title",
   },
   {
     type: "list",
-    message: "Choose a license for your project: ",
+    message: "Choose a license for your project:",
     name: "license",
     choices: licenseChoices,
   },
   {
     type: "input",
-    message: "Write a short introduction for your project: ",
+    message: "Write a short introduction for your project:",
     name: "intro",
   },
   {
     type: "editor",
-    message: "Enter the content of your usage section: ",
+    message: "Enter the content of your usage section:",
     name: "usage",
     default:
       "Replace this text with instructions on how to use your application.",
   },
   {
     type: "editor",
-    message: "Enter the content of your installation section: ",
+    message: "Enter the content of your installation section:",
     name: "install",
     default:
       "Replace this text with instructions on how to install your application if needed.",
   },
   {
     type: "editor",
-    message: "Enter the content of your usage section: ",
+    message: "Enter the content of your usage section:",
     name: "usage",
     default:
       "Replace this text with instructions on how to use your application.",
   },
   {
+    type: "editor",
+    message: "Enter some content for the testing section if you would like: ",
+    name: "test",
+    default:
+      "Replace this text with instructions on how to test your application. You can save this file blank if your app does not have tests.",
+  },
+  {
     type: "input",
-    message: "Enter your GitHub profile url: ",
+    message: "Enter your GitHub username:",
     name: "github",
   },
   {
     type: "input",
-    message: "Enter your email address: ",
+    message: "Enter your email address:",
     name: "email",
   },
   {
