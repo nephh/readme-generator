@@ -79,7 +79,7 @@ I welcome and appreciate contributions from the open-source community! Before yo
 
 ### Code of Conduct
 
-We are committed to providing a welcoming and respectful environment for all contributors. Please read the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) to understand our expectations for behavior and interactions within this project.
+I am committed to providing a welcoming and respectful environment for all contributors. Please read the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) to understand the expectations for behavior and interactions within this project.
 
 ### How to Contribute
 

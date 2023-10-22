@@ -15,11 +15,6 @@ const licenseChoices = [
 const questions = [
   {
     type: "input",
-    message: "What would you like the filename to be?",
-    name: "fileName",
-  },
-  {
-    type: "input",
     message: "Enter the title of your project:",
     name: "title",
   },
@@ -81,13 +76,13 @@ const questions = [
 
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, (err) => {
-    err ? console.error(err) : console.log("Success!");
+    err ? console.error(err) : console.log("Success! Your readme has been generated.");
   });
 }
 
 function init() {
   inquirer.prompt(questions).then((response) => {
-    writeToFile(`${response.fileName}.md`, generate(response));
+    writeToFile(`README.md`, generate(response));
   });
 }
 
