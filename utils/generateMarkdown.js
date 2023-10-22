@@ -115,7 +115,7 @@ function renderTableOfContents(test, contribute, license) {
     test.trim() === ""
       ? ``
       : `
-- [Testing](#Testing)`;
+- [Testing](#testing)`;
 
 const licenseSection =
     license === "None"

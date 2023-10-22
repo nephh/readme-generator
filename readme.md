@@ -9,7 +9,7 @@ A simple but effective readme generator.
 
 - [Installation](#installation)
 - [Usage](#usage) 
-- [Testing](#Testing)
+- [Testing](#testing)
 - [Credits](#credits) 
 - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
